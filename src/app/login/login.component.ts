@@ -31,11 +31,30 @@ export class LoginComponent implements OnInit {
   login(user: User) {
     console.log(user);
 
-    this.http.post(`${this.apiURL}/session`, user)
+    if(user.nome !== ""){
+      console.log('register');
+      this.http.post(`${this.apiURL}/saveUser`, user)
       .subscribe(result => {
         window.localStorage.setItem('currentUser', JSON.stringify(result));
-        this.r.navigate(['/home']);
+        console.log(result);
       });
+    } else {
+      if(user.senha !== ""){
+        console.log('login');
+        this.http.post(`${this.apiURL}/session`, user)
+        .subscribe(result => {
+          window.localStorage.setItem('currentUser', JSON.stringify(result));
+          console.log(result);
+        });
+      } else {
+        console.log('reset pass');
+        this.http.post(`${this.apiURL}/forgot`, user)
+        .subscribe(result => {
+          window.localStorage.setItem('currentUser', JSON.stringify(result));
+          console.log(result);
+        });
+      }
+    }
   }
   
   onSubmit() {
