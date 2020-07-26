@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { User } from '../models/User';
 
 @Component({
@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   @Input()
   public session: any;
 
-  constructor(private http : HttpClient, private r: Router){
+  constructor(private route: ActivatedRoute, private http : HttpClient, private r: Router){
     this.apiURL = 'http://localhost:3333';
     this.rota = r;
   }
