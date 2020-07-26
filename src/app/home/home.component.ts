@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     this.session = JSON.parse(window.localStorage.getItem('currentUser'));
     console.log(this.session);
 
-    this.http.get(`${this.apiURL}/getUser`, JSON.stringIfy(this.session))
+    this.http.get(`${this.apiURL}/getUser`, JSON.stringify(this.session))
     .subscribe(result => {
       this.home_resumo = result;
       console.log(this.home_resumo);
