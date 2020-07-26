@@ -30,13 +30,11 @@ export class HomeComponent implements OnInit {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Authorization': `Bearer ${this.session.token}`
-      }),
-
-      params: new HttpParams()
-       .set('email', this.session.email)
+      })
     };
+    console.log(httpOptions);
 
-    this.http.get(`${this.apiURL}/getUser`, httpOptions)
+    this.http.get(`${this.apiURL}/home/${this.session.id}`, httpOptions)
     .subscribe(result => {
       this.home_resumo = result;
       console.log(this.home_resumo);
