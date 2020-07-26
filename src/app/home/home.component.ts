@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit {
     this.http.get(`${this.apiURL}/home/${this.session.id}`, httpOptions)
     .subscribe(result => {
       this.home_resumo = result;
-      console.log(this.home_resumo);
     });
   }
 
