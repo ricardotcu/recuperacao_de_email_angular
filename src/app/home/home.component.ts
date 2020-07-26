@@ -25,8 +25,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.session = JSON.parse(window.localStorage.getItem('currentUser'));
     console.log(this.session);
-
-    let id_user = parseInt(this.session.id)
     
     const httpOptions = {
       headers: new HttpHeaders({
@@ -35,7 +33,7 @@ export class HomeComponent implements OnInit {
       }),
 
       params: new HttpParams()
-       .set('id', id_user)
+       .set('id', this.session.id)
     };
 
     this.http.get(`${this.apiURL}/getUser`, httpOptions)
