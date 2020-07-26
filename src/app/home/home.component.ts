@@ -9,6 +9,7 @@ import { User } from '../models/User';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  readonly apiURL : string;
   public rota: Router;
   public id_user: string;
   public home_resumo: any;
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
   public session: any;
 
   constructor(private route: ActivatedRoute, private http : HttpClient, private r: Router){
+    this.apiURL = 'http://localhost:3333';
     this.rota = r;
   }
 
@@ -30,7 +32,7 @@ export class HomeComponent implements OnInit {
       })
     };
 
-    this.http.get(`${environment.API_URL}/home/${this.session.id}`, httpOptions)
+    this.http.get(`${this.apiURL}/home/${this.session.id}`, httpOptions)
     .subscribe(result => {
       this.home_resumo = result;
       console.log(this.home_resumo);
