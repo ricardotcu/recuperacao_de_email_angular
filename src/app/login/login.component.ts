@@ -17,11 +17,9 @@ export class LoginComponent implements OnInit {
     senha: new FormControl(''),
     senha_confirmacao: new FormControl('')
   });	
-  readonly apiURL : string;
   public rota: Router;
 
   constructor(private http : HttpClient, private r: Router){
-    this.apiURL = 'http://localhost:3333';
     this.rota = r;
   }
 
@@ -31,7 +29,7 @@ export class LoginComponent implements OnInit {
   login(user: User) {
     
     if(user.nome !== ""){
-      this.http.post(`${this.apiURL}/saveUser`, user)
+      this.http.post(`${environment.API_URL}/saveUser`, user)
       .subscribe(result => {
         window.localStorage.setItem('currentUser', JSON.stringify(result));
         this.r.navigate(['/home']);
