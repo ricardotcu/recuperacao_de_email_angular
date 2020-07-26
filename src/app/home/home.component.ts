@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, httpOptions, HttpParams } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { User } from '../models/User';
 
@@ -26,7 +26,17 @@ export class HomeComponent implements OnInit {
     this.session = JSON.parse(window.localStorage.getItem('currentUser'));
     console.log(this.session);
 
-    this.http.get(`${this.apiURL}/getUser`, JSON.stringify(this.session))
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'my-auth-token'
+      })
+
+      params: new HttpParams()
+       .set('id', this.session.id)
+    };
+
+    this.http.get(`${this.apiURL}/getUser`, httpOptions)
     .subscribe(result => {
       this.home_resumo = result;
       console.log(this.home_resumo);
