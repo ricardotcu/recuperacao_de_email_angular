@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.session = JSON.parse(window.localStorage.getItem('currentUser'));
-    console.log(this.session);
     
     const httpOptions = {
       headers: new HttpHeaders({
@@ -32,7 +31,6 @@ export class HomeComponent implements OnInit {
         'Authorization': `Bearer ${this.session.token}`
       })
     };
-    console.log(httpOptions);
 
     this.http.get(`${this.apiURL}/home/${this.session.id}`, httpOptions)
     .subscribe(result => {
