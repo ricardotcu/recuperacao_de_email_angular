@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
       }),
 
       params: new HttpParams()
-       .set('id', this.session.id)
+       .set('email', this.session.email)
     };
 
     this.http.get(`${this.apiURL}/getUser`, httpOptions)
