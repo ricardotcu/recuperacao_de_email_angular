@@ -29,8 +29,8 @@ export class HomeComponent implements OnInit {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'Authorization': 'my-auth-token'
-      })
+        'Authorization': `${this.session.token}`
+      }),
 
       params: new HttpParams()
        .set('id', this.session.id)
